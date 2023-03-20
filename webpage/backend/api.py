@@ -2,15 +2,24 @@ import requests
 
 
 def send_request(repo, endpoint, author):
+    url = "https://api.github.com/search"
     if endpoint == "commits":
-        url = f"https://api.github.com/repos/{repo}/{endpoint}"
-        params = f"?author={author}&per_page=100"
-    if endpoint == "pulls":
-        url = "https://api.github.com/search/issues"
-        params = f"?q=is:pull-request+author:{author}+repo:{repo}"
+        url += "/commits"
+        params = f"?q=repo:{repo}+author:{author}"
+    else:
+        url += "/issues"
+
+        if endpoint == "pulls":
+            params = f"?q=is:pull-request+repo:{repo}+author:{author}"
+        elif endpoint == "reviews":
+            params = f"?q=is:pull-request+repo:{repo}+reviewed-by:{author}"
+        elif endpoint == "comments":
+            params = f"?q=is:issue+repo:{repo}+commenter:{author}"
+        else:
+            return "Invalid endpoint."
 
     # github personal access token
-    token = "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"
+    token = "YOUR_TOKEN_HERE"
     headers = {"Authorization": f"token {token}"}
 
     # send request
@@ -28,15 +37,21 @@ def main():
     author = "SisoroT"
     # author = "Stebalien"
 
-    # get all commits from author
+    # get and print total commits from author
     commits = send_request(repo, "commits", author)
-    # print total commits for author
-    print(len(commits))
+    print("Commits:", commits["total_count"])
 
-    # get all pull requests from author
+    # get and print total pull requests from author
     pulls = send_request(repo, "pulls", author)
-    # print total pull requests for author
-    print(pulls["total_count"])
+    print("Pull requests:", pulls["total_count"])
+
+    # get and print total pull requests reviewed by author
+    reviews = send_request(repo, "reviews", author)
+    print("Code reviews:", reviews["total_count"])
+
+    # get and print total issues that have a comment from author
+    comments = send_request(repo, "comments", author)
+    print("Issue comments:", comments["total_count"])
 
 
 if __name__ == "__main__":
