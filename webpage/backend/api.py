@@ -10,9 +10,9 @@ def send_request(repo, endpoint, author):
         url += "/issues"
 
         if endpoint == "pulls":
-            params = f"?q=is:pull-request+repo:{repo}+author:{author}"
+            params = f"?q=is:pr+repo:{repo}+author:{author}"
         elif endpoint == "reviews":
-            params = f"?q=is:pull-request+repo:{repo}+reviewed-by:{author}"
+            params = f"?q=is:pr+repo:{repo}+reviewed-by:{author}"
         elif endpoint == "comments":
             params = f"?q=is:issue+repo:{repo}+commenter:{author}"
         else:
