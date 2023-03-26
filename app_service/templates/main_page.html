@@ -4,13 +4,23 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>GitHubGo</title>
-        <link rel="stylesheet" href="css/mpStyle.css" />
-        <link rel="icon" href="assets/GitHubGoIcon.png" type="image/x-icon" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/mpStyle.css') }}"
+        />
+        <link
+            rel="icon"
+            href="{{ url_for('static', filename='images/GitHubGoIcon.png') }}"
+            type="image/x-icon"
+        />
     </head>
 
     <body>
         <header class="logo">
-            <img src="assets/GitHubGoLogo.png" alt="" />
+            <img
+                src="{{ url_for('static', filename='images/GitHubGoLogo.png') }}"
+                alt=""
+            />
             <nav>
                 <ul class="nav_links">
                     <li><a href="#">Sign up</a></li>

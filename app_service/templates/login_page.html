@@ -4,7 +4,10 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/loginpage.css" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/loginpage.css') }}"
+        />
         <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -22,28 +25,40 @@
                 muted="muted"
                 loop="loop"
             >
-                <source src="./assets/video.mp4" type="video/mp4" />
+                <source
+                    src="{{ url_for('static', filename='images/video.mp4') }}"
+                    type="video/mp4"
+                />
             </video>
         </div>
         <div class="whole-container">
             <div class="Logo">
-                <img src="./assets/logo.png" alt="logo" />
+                <img
+                    src="{{ url_for('static', filename='images/logo.png') }}"
+                    alt="logo"
+                />
             </div>
             <div class="LoginBox">
                 <h1>Login</h1>
-                <img src="./assets/user-solid.png" alt="person" />
+                <img
+                    src="{{ url_for('static', filename='images/user-solid.png') }}"
+                    alt="person"
+                />
                 <input type="Username" placeholder="Enter Username" />
 
-                <img src="./assets/lock-solid.png" alt="lock" />
+                <img
+                    src="{{ url_for('static', filename='images/lock-solid.png') }}"
+                    alt="lock"
+                />
                 <input type="Password" placeholder="Enter Password" />
                 <div class="buttons">
                     <button>Login</button>
-                    <form action="register.html">
+                    <form action="{{ url_for('register') }}">
                         <button type="submit">Register</button>
                     </form>
                 </div>
                 <div class="LoginFooter">
-                    <a id="resetlink" href="resetpage.html"
+                    <a id="resetlink" href="{{ url_for('forgot') }}"
                         >Forgot your username/password?</a
                     >
                 </div>
