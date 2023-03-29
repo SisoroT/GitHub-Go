@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="static/GitHubGoIcon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="static/reset.css">
+    <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
         integrity="sha384-xr/XOqhL0ZfJcE0ETsHsahrWv9OJyov/v+caI1tVJc+I2fK37ZzWRa5imFdjFETB" crossorigin="anonymous">
     <title>GitHub Go ResetPassword</title>
@@ -16,13 +16,13 @@
 
     <div class="video-container">
         <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-            <source src="static/video.mp4" type="video/mp4">
+            <source src="{{ url_for('static', filename='assets/video.mp4') }}" type="video/mp4">
         </video>
     </div>
     <div class="whole-container">
         <div class="Logo">
-            <a href="home">
-                <img src="static/logo.png" alt="logo" />
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="logo" />
             </a>
         </div>
         <div class="ResetBox">
@@ -30,19 +30,19 @@
 
 
 
-            <img src="static/mail.png" alt="email" />
+            <img src="{{ url_for('static', filename='assets/mail.png') }}" alt="email" />
             <input type="email" id="email" placeholder="Enter Email">
 
             <div class="buttons">
 
 
-                <button>Send email</button>
+                <button>Verify</button>
 
             </div>
             <div class="ResetFooter">
 
 
-                <p>Already have an account? <a href="login">Sign in</a>.</p>
+                <p>Already have an account? <a href="{{ url_for('login') }}">Sign in</a>.</p>
 
             </div>
 

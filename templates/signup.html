@@ -4,8 +4,8 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="static/GitHubGoIcon.png" type="image/x-icon" />
-        <link rel="stylesheet" href="static/register.css" />
+        <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}" />
         <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
@@ -23,14 +23,14 @@
                 muted="muted"
                 loop="loop"
             >
-                <source src="static/video.mp4" type="video/mp4" />
+                <source src="{{ url_for('static', filename='assets/video.mp4') }}" type="video/mp4" />
             </video>
         </div>
 
         <div class="whole-container">
             <div class="Logo">
-                <a href="home">
-                    <img src="static/logo.png" alt="logo" />
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="logo" />
                 </a>
             </div>
             <div class="RegisterBox">
@@ -39,21 +39,21 @@
                 <p style="font-size: 20p"></p>
 
                 <p>Please fill in this form to create an account.</p>
-                <img src="static/mail.png" alt="email" />
+                <img src="{{ url_for('static', filename='assets/mail.png') }}" alt="email" />
                 <input
                     type="Username"
                     id="username"
                     placeholder="Enter Email"
                 />
-                <img src="static/user-solid.png" alt="person" />
+                <img src="{{ url_for('static', filename='assets/user-solid.png') }}" alt="person" />
                 <input
                     type="Username"
                     id="username"
                     placeholder="Enter Username"
                 />
-                <img src="static/lock-solid.png" alt="lock" />
+                <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="lock" />
                 <input type="Password" placeholder="Enter Password" />
-                <img src="static/lock-solid.png" alt="person" />
+                <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="person" />
                 <input type="Password" placeholder="Confirm Password" />
                 <p id="privacy">
                     By creating an account you agree to our
@@ -63,12 +63,12 @@
                     <button>Register</button>
                 </div>
                 <div class="RegisterFooter">
-                    <a id="resetlink" href="reset"
+                    <a id="resetlink" href="{{ url_for('reset') }}"
                         >Forgot your username/password?</a
                     >
                     <p>
                         Already have an account?
-                        <a href="login">Sign in</a>.
+                        <a href="{{ url_for('login') }}">Sign in</a>.
                     </p>
                 </div>
             </div>
