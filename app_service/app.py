@@ -20,14 +20,18 @@ def home():
             counts = {}
 
             for endpoint in endpoints:
-                data = send_request(repo, author, endpoint)
+                try:
+                    response = send_request(repo, author, endpoint)
+                except Exception as e:
+                    error = str(e)
+                    return render_template("home.html", error=error)
 
                 # if total_count isn't in the response, the repo or username is invalid
-                if "total_count" not in data:
+                if "total_count" not in response:
                     error = "Invalid repository or username. Please check the input and try again."
                     return render_template("home.html", error=error)
 
-                counts[endpoint] = data["total_count"]
+                counts[endpoint] = response["total_count"]
 
             user_not_contributor = sum(counts.values()) == 0
             if user_not_contributor:
