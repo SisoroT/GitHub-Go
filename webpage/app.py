@@ -19,9 +19,9 @@ def signup():
     return render_template('signup.html')
 
 
-@app.route("/resetPassword")
+@app.route("/reset_password")
 def reset():
-    return render_template('resetPassword.html')
+    return render_template('reset_password.html')
 
 
 @app.route("/reset")
