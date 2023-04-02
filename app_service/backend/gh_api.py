@@ -32,25 +32,23 @@ def send_request(repo, author, endpoint):
 def main():
     # repo name
     repo = "CSC-4350-TR-SP2023/Team1"
-    # repo = "baskerville/bspwm"
     # person to lookup information for
     author = "SisoroT"
-    # author = "Stebalien"
 
     # get and print total commits from author
-    commits = send_request(repo, "commits", author)
+    commits = send_request(repo, author, "commits")
     print("Commits:", commits["total_count"])
 
     # get and print total pull requests from author
-    pulls = send_request(repo, "pulls", author)
+    pulls = send_request(repo, author, "pulls")
     print("Pull requests:", pulls["total_count"])
 
     # get and print total pull requests reviewed by author
-    reviews = send_request(repo, "reviews", author)
+    reviews = send_request(repo, author, "reviews")
     print("Code reviews:", reviews["total_count"])
 
     # get and print total issues that have a comment from author
-    comments = send_request(repo, "comments", author)
+    comments = send_request(repo, author, "comments")
     print("Issue comments:", comments["total_count"])
 
 
