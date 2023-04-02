@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHubGo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
+  </head>
+  <body>
+    <header class="logo">
+      <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='assets/GitHubGoLogo.png') }}" alt="Logo">
+      </a>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="{{ url_for('signup') }}">Sign up</a></li>
+          <li>|</li>
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="boxContainer1">
+      <table class="elementsContainter1">
+        <tr>
+          <td>
+            <input type="text" placeholder="Username" class="search1">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="boxContainer2">
+      <table class="elementsContainter2">
+        <tr>
+          <td>
+            <input type="text" placeholder="Repository" class="search2">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="butContainer">
+      <a href="{{ url_for('data') }}">
+        <button class="button">GO</button>
+      </a>
+    </div>
+  </body>
+</html>
