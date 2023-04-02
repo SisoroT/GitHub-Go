@@ -1,7 +1,7 @@
 import requests
 
 
-def send_request(repo, endpoint, author):
+def send_request(repo, author, endpoint):
     url = "https://api.github.com/search"
     if endpoint == "commits":
         url += "/commits"
