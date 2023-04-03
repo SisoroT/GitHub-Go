@@ -21,16 +21,19 @@
         </nav>
     </header>
 
-    {% if error %}
-    <p class="error">{{ error }}</p>
-    {% endif %}
+    <ul class="flashes">
+        {% for message in get_flashed_messages() %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
 
     <form action="#" method="POST">
         <div class="boxContainer1">
             <table class="elementsContainter1">
                 <tr>
                     <td>
-                        <input type="text" placeholder="Repository" class="search2" name="repository" />
+                        <input type="text" placeholder="Repository" class="search2" name="repository"
+                            value="{{ repository }}" />
                     </td>
                 </tr>
             </table>
@@ -39,7 +42,8 @@
             <table class="elementsContainter2">
                 <tr>
                     <td>
-                        <input type="text" placeholder="Username" class="search1" name="username" />
+                        <input type="text" placeholder="Username" class="search1" name="username"
+                            value="{{ username }}" />
                     </td>
                 </tr>
             </table>

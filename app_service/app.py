@@ -1,7 +1,8 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, flash
 from backend.gh_api import send_request
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key_here"
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -23,13 +24,18 @@ def home():
                 try:
                     response = send_request(repo, author, endpoint)
                 except Exception as e:
-                    error = str(e)
-                    return render_template("home.html", error=error)
+                    flash(str(e))
+                    return render_template(
+                        "home.html", repository=repo, username=author
+                    )
 
                 # if total_count isn't in the response, the repo or username is invalid
                 if "total_count" not in response:
                     error = "Invalid repository or username. Please check the input and try again."
-                    return render_template("home.html", error=error)
+                    flash(error)
+                    return render_template(
+                        "home.html", repository=repo, username=author
+                    )
 
                 counts[endpoint] = response["total_count"]
 
@@ -38,7 +44,8 @@ def home():
                 error = (
                     f'User "{author}" is not a contributor to the "{repo}" repository.'
                 )
-                return render_template("home.html", error=error)
+                flash(error)
+                return render_template("home.html", repository=repo, username=author)
 
             # if the repo and username are valid, redirect to the data page
             # and pass all the information received from the API
@@ -54,16 +61,21 @@ def home():
                 )
             )
         else:
-            print(error)
             error = "Please provide both repository and username."
+            flash(error)
+            return render_template("home.html", repository=repo, username=author)
 
-    return render_template("home.html", error=error)
+    return render_template("home.html")
 
 
-@app.route(
-    "/data/<path:repository>/<string:username>/<int:commits>/<int:pulls>/<int:reviews>/<int:comments>"
-)
-def data(repository, username, commits, pulls, reviews, comments):
+@app.route("/data/<path:repository>/<string:username>")
+def data(repository, username):
+    # collect extra information from url arguments
+    commits = request.args.get("commits")
+    pulls = request.args.get("pulls")
+    reviews = request.args.get("reviews")
+    comments = request.args.get("comments")
+
     return render_template(
         "data.html",
         repository=repository,
