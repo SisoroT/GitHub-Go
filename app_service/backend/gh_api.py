@@ -1,7 +1,8 @@
 import requests
+from requests.exceptions import RequestException
 
 
-def send_request(repo, author, endpoint):
+def send_request(repo: str, author: str, api_key: str, endpoint: str):
     url = "https://api.github.com/search"
     if endpoint == "commits":
         url += "/commits"
@@ -19,14 +20,24 @@ def send_request(repo, author, endpoint):
             return "Invalid endpoint."
 
     # github personal access token
-    token = "YOUR_TOKEN_HERE"
+    token = api_key
     headers = {"Authorization": f"token {token}"}
 
-    # send request
-    response = requests.get(url + params, headers=headers)
+    try:
+        # send request
+        response = requests.get(url + params, headers=headers)
+        # decode json response
+        json_response = response.json()
+    except RequestException as e:
+        return f"Request error: {e}"
+    except ValueError:
+        return "Error decoding JSON response."
 
-    # return json response
-    return response.json()
+    # check for bad credentials
+    if "message" in json_response and json_response["message"] == "Bad credentials":
+        return "Invalid personal access token."
+
+    return json_response
 
 
 def main():
@@ -35,20 +46,22 @@ def main():
     # person to lookup information for
     author = "SisoroT"
 
+    api_key = "YOUR_API_KEY"
+
     # get and print total commits from author
-    commits = send_request(repo, author, "commits")
+    commits = send_request(repo, author, api_key, "commits")
     print("Commits:", commits["total_count"])
 
     # get and print total pull requests from author
-    pulls = send_request(repo, author, "pulls")
+    pulls = send_request(repo, author, api_key, "pulls")
     print("Pull requests:", pulls["total_count"])
 
     # get and print total pull requests reviewed by author
-    reviews = send_request(repo, author, "reviews")
+    reviews = send_request(repo, author, api_key, "reviews")
     print("Code reviews:", reviews["total_count"])
 
     # get and print total issues that have a comment from author
-    comments = send_request(repo, author, "comments")
+    comments = send_request(repo, author, api_key, "comments")
     print("Issue comments:", comments["total_count"])
 
 
