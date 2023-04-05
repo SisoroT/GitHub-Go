@@ -46,7 +46,7 @@ def main():
     # person to lookup information for
     author = "SisoroT"
 
-    api_key = "YOUR_API_KEY"
+    api_key = "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"
 
     # get and print total commits from author
     commits = send_request(repo, author, api_key, "commits")
