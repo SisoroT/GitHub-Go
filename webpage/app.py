@@ -30,6 +30,7 @@ def home():
             counts = {}
 
             for endpoint in endpoints:
+                # send request to github api
                 response = send_request(repo, author, api_key, endpoint)
 
                 is_error = isinstance(response, str)
@@ -37,12 +38,7 @@ def home():
                     flash(response)
                     return render_template("home.html", **template_params)
 
-                # if total_count isn't in the response, the repo or username is invalid
-                if "total_count" not in response:
-                    error = "Invalid repository or username. Please check the input and try again."
-                    flash(error)
-                    return render_template("home.html", **template_params)
-
+                # store the total count for each endpoint
                 counts[endpoint] = response["total_count"]
 
             user_not_contributor = sum(counts.values()) == 0
@@ -53,8 +49,7 @@ def home():
                 flash(error)
                 return render_template("home.html", **template_params)
 
-            # if the repo and username are valid, redirect to the data page
-            # and pass all the information received from the API
+            # if everything valid, redirect to the data page with info from API
             return redirect(
                 url_for(
                     "data",

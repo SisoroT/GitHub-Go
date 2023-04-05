@@ -37,6 +37,10 @@ def send_request(repo: str, author: str, api_key: str, endpoint: str):
     if "message" in json_response and json_response["message"] == "Bad credentials":
         return "Invalid personal access token."
 
+    # check for invalid repo or username
+    if "total_count" not in response:
+        return "Invalid repository or username. Please check the input and try again."
+
     return json_response
 
 
@@ -47,22 +51,12 @@ def main():
     author = "SisoroT"
 
     api_key = "YOUR_API_KEY"
+    endpoints = ["commits", "pulls", "reviews", "comments"]
 
-    # get and print total commits from author
-    commits = send_request(repo, author, api_key, "commits")
-    print("Commits:", commits["total_count"])
-
-    # get and print total pull requests from author
-    pulls = send_request(repo, author, api_key, "pulls")
-    print("Pull requests:", pulls["total_count"])
-
-    # get and print total pull requests reviewed by author
-    reviews = send_request(repo, author, api_key, "reviews")
-    print("Code reviews:", reviews["total_count"])
-
-    # get and print total issues that have a comment from author
-    comments = send_request(repo, author, api_key, "comments")
-    print("Issue comments:", comments["total_count"])
+    # get and print the totals for each endpoint by author
+    for endpoint in endpoints:
+        response = send_request(repo, author, api_key, endpoint)
+        print(f"{endpoint}: {response['total_count']}")
 
 
 if __name__ == "__main__":
