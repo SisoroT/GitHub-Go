@@ -94,14 +94,14 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/register")
-def register():
-    return render_template("register.html")
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
 
 
 @app.route("/forgot")
 def forgot():
-    return render_template("forgot_password.html")
+    return render_template("reset.html")
 
 
 @app.route("/reset")

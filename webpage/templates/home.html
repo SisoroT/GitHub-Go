@@ -5,16 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GitHubGo</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/mpStyle.css') }}" />
-    <link rel="icon" href="{{ url_for('static', filename='images/GitHubGoIcon.png') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
 </head>
 
 <body>
     <header class="logo">
-        <img src="{{ url_for('static', filename='images/GitHubGoLogo.png') }}" alt="" />
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='assets/GitHubGoLogo.png') }}" alt="Logo" />
+        </a>
         <nav>
             <ul class="nav_links">
-                <li><a href="{{ url_for('register') }}">Sign up</a></li>
+                <li><a href="{{ url_for('signup') }}">Sign up</a></li>
                 <li>|</li>
                 <li><a href="{{ url_for('login') }}">Login</a></li>
             </ul>

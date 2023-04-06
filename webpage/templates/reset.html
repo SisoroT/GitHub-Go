@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-xr/XOqhL0ZfJcE0ETsHsahrWv9OJyov/v+caI1tVJc+I2fK37ZzWRa5imFdjFETB" crossorigin="anonymous">
+    <title>GitHub Go ResetPassword</title>
+</head>
+
+<body>
+
+    <div class="video-container">
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="{{ url_for('static', filename='assets/video.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+    <div class="whole-container">
+        <div class="Logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="logo" />
+            </a>
+        </div>
+        <div class="ResetBox">
+            <h1>Forgot Password?</h1>
+
+
+
+            <img src="{{ url_for('static', filename='assets/mail.png') }}" alt="email" />
+            <input type="email" id="email" placeholder="Enter Email">
+
+            <div class="buttons">
+
+
+                <button>Verify</button>
+
+            </div>
+            <div class="ResetFooter">
+
+
+                <p>Already have an account? <a href="{{ url_for('login') }}">Sign in</a>.</p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    </div>
+</body>
+
+</html>
