@@ -38,7 +38,7 @@ def send_request(repo: str, author: str, api_key: str, endpoint: str):
         return "Invalid personal access token."
 
     # check for invalid repo or username
-    if "total_count" not in response:
+    if "total_count" not in json_response:
         return "Invalid repository or username. Please check the input and try again."
 
     return json_response
@@ -50,13 +50,17 @@ def main():
     # person to lookup information for
     author = "SisoroT"
 
-    api_key = "YOUR_API_KEY"
+    api_key = "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"
     endpoints = ["commits", "pulls", "reviews", "comments"]
 
     # get and print the totals for each endpoint by author
     for endpoint in endpoints:
         response = send_request(repo, author, api_key, endpoint)
-        print(f"{endpoint}: {response['total_count']}")
+        is_error = isinstance(response, str)
+        if is_error:
+            print(response)
+        else:
+            print(f"{endpoint}: {response['total_count']}")
 
 
 if __name__ == "__main__":
