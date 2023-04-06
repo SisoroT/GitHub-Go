@@ -14,7 +14,7 @@ a {
 }
 
 body {
-    background-color: #0D1117;
+    background-color: #0d1117;
 }
 
 header {
@@ -22,7 +22,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #161B22;
+    background-color: #161b22;
 }
 
 img {
@@ -44,7 +44,7 @@ img {
 }
 
 .nav_links li a:hover {
-    color: #846CA0
+    color: #846ca0;
 }
 
 .boxContainer1 {
@@ -53,7 +53,7 @@ img {
     position: relative;
     width: 300px;
     height: 42px;
-    border: 4px solid #846CA0;
+    border: 4px solid #846ca0;
     background-color: whitesmoke;
     padding: 0px 10px;
     border-radius: 50px;
@@ -85,7 +85,7 @@ img {
     position: relative;
     width: 300px;
     height: 42px;
-    border: 4px solid #846CA0;
+    border: 4px solid #846ca0;
     background-color: whitesmoke;
     padding: 0px 10px;
     border-radius: 50px;
@@ -105,7 +105,6 @@ img {
     border-radius: 50px;
     font-size: 18px;
     background-color: whitesmoke;
-
 }
 
 .search2:focus {
@@ -118,7 +117,7 @@ img {
 }
 
 .button {
-    border: 1px solid #846CA0;
+    border: 1px solid #846ca0;
     background: none;
     padding: 8px 20px;
     width: 20%;
@@ -126,7 +125,7 @@ img {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    color: #846CA0
+    color: #846ca0;
 }
 
 .button:hover {
@@ -134,19 +133,18 @@ img {
 }
 
 .button::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #846CA0;
+    background-color: #846ca0;
     z-index: -1;
     transition: transform 300ms ease-in-out;
 
     transform: scaleX(0);
     transform-origin: left;
-
 }
 
 .button:hover::before,
