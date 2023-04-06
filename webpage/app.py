@@ -46,7 +46,7 @@ def reset():
     return render_template('reset_password.html')
 
 
-@app.route("/reset")
+@app.route("/forgot")
 def forgot():
     return render_template('reset.html')
 
