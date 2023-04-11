@@ -12,13 +12,19 @@
         <a href="{{ url_for('home')}} ">
             <img src="{{ url_for('static', filename='assets/GitHubGoLogo.png') }}" alt="Github logo" class="logo" />
         </a>
-        <div class="profile">
-            <img src="{{ url_for('static', filename='assets/blank profile.png') }}" alt="Profile icon"
-                class="profile-icon" />
-            <ul class="dropdown">
-                <li><a href="#">Log Out</a></li>
-            </ul>
+        {% if g.user %}
+        <div class="nav_links">
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         </div>
+        {% else %}
+        <nav>
+            <ul class="nav_links">
+                <li><a href="{{ url_for('signup') }}">Sign up</a></li>
+                <li>|</li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+        {% endif %}
     </header>
     <div class="container">
         <div class="repo-box">
@@ -49,9 +55,15 @@
             </a>
         </div>
         {% if search_history %}
-        <div class="search-box"></div>
+        <div class="search-box">
+            {% for search in search_history %}
+            <div class="search">
+                <h2>Repository: <span>{{ search.repo }}</span></h2>
+                <h2>Username: <span>{{ search.username }}</span></h2>
+            </div>
+            {% endfor %}
+        </div>
         {% endif %}
-    </div>
 </body>
 
 </html>
