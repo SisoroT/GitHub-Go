@@ -1,32 +1,25 @@
-from flask import Flask, render_template, url_for, redirect, request, flash, session
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, url_for, redirect, request, flash, session, g
+from werkzeug.security import check_password_hash, generate_password_hash
+from backend.models import db, User, Search
 from backend.gh_api import send_request
 
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
-db = SQLAlchemy(app)
+db.init_app(app)
+# load the database
+with app.app_context():
+    db.create_all()
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
-    searches = db.relationship("Search", backref="user", lazy=True)
+@app.before_request
+def load_logged_in_user():
+    user_id = session.get("user_id")
 
-    def __repr__(self):
-        return f"User('{self.username}','{self.email}','{self.password}')"
-
-
-class Search(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False)
-    repo = db.Column(db.String(30), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-
-    def __repr__(self):
-        return f"Search('{self.username}','{self.repo}')"
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.query.get(user_id)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -73,6 +66,22 @@ def home():
                 flash(error)
                 return render_template("home.html", **template_params)
 
+            # save search to database if logged in
+            if g.user:
+                user = User.query.filter_by(username=session["username"]).first()
+                if user:
+                    # Check if the search already exists for the logged-in user
+                    # TODO: make ignore case (maybe use casefold())
+                    existing_search = Search.query.filter_by(
+                        username=author, repo=repo, user_id=user.id
+                    ).first()
+
+                    # Only add the search if it doesn't exist
+                    if not existing_search:
+                        search = Search(username=author, repo=repo, user_id=user.id)
+                        db.session.add(search)
+                        db.session.commit()
+
             # if everything valid, redirect to the data page with info from API
             return redirect(
                 url_for(
@@ -83,6 +92,7 @@ def home():
                     pulls=counts["pulls"],
                     reviews=counts["reviews"],
                     comments=counts["comments"],
+                    search_history={repo: author},
                 )
             )
         else:
@@ -102,6 +112,11 @@ def data(repository, username):
     reviews = request.args.get("reviews")
     comments = request.args.get("comments")
 
+    # get search history if logged in
+    search_history = None
+    if g.user:
+        search_history = Search.query.filter_by(user_id=g.user.id).all()
+
     return render_template(
         "data.html",
         repository=repository,
@@ -110,16 +125,69 @@ def data(repository, username):
         pulls=pulls,
         reviews=reviews,
         comments=comments,
+        search_history=search_history,
     )
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
+    # if logged in, redirect to home page
+    if g.user:
+        return redirect(url_for("home"))
+
+    # if username and password exist in DB, log in
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        user = User.query.filter_by(username=username).first()
+
+        if user and check_password_hash(user.password, password):
+            session.clear()
+            session["user_id"] = user.id
+            session["username"] = username
+            return redirect(url_for("home"))
+        # if user or password is incorrect/does not exist
+        else:
+            flash("Invalid username or password.")
+
     return render_template("login.html", title="Login")
 
 
-@app.route("/signup")
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("home"))
+
+
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
+    if request.method == "POST":
+        email = request.form["email"]
+        username = request.form["username"]
+        password = request.form["password"]
+        confirm_password = request.form["confirm_password"]
+
+        # if passwords do not match flash error
+        if password != confirm_password:
+            flash("Passwords do not match.")
+            return redirect(url_for("signup"))
+
+        # if username already exists flash error
+        user = User.query.filter_by(username=username).first()
+        if user:
+            flash("Username already taken.")
+            return redirect(url_for("signup"))
+
+        # if valid, hash password and add all info to database
+        hashed_password = generate_password_hash(password, method="sha256")
+        new_user = User(username=username, email=email, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        # alert user that account was created successfully
+        flash("Account created successfully.")
+        return redirect(url_for("login"))
+
     return render_template("signup.html")
 
 
@@ -131,6 +199,16 @@ def forgot():
 @app.route("/reset")
 def reset():
     return render_template("reset_password.html")
+
+
+# NOTE: Testing route to view all entries in the database
+@app.route("/all_entries")
+def all_entries():
+    users = User.query.all()
+    search_histories = Search.query.all()
+    return render_template(
+        "all_entries.html", users=users, search_histories=search_histories
+    )
 
 
 if __name__ == "__main__":
