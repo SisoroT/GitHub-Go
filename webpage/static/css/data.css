@@ -70,16 +70,58 @@ h1 {
 .profile:hover .dropdown {
     display: block;
 }
-
-.container {
+.repo-box {
     max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+.search-box {
+    margin-top: 60px;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow-y: scroll;
+    font-size: 20px;
+    border: #846ca0 5px solid;
+    border-radius: 10px;
+    color: #c9d1d9;
+    text-align: center;
+    width: 600px;
+    height: 700px;
+    background-color: #161b22;
+}
+.individual {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 160px;
+    padding-top: 10px;
+    width: 520px;
+    border: #c9d1d9 3px solid;
+    border-radius: 15px;
+}
+
+.individual .stat {
+    padding: 12px;
+}
+
+.search-box .repo-box {
+    display: block;
+    font-size: 13px;
+}
+
+.container {
+    margin-top: -100px;
+    display: flex;
+    gap: 250px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .repo-info {

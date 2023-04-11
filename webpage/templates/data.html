@@ -21,31 +21,36 @@
         </div>
     </header>
     <div class="container">
-        <div class="repo-info">
-            <h2>Repository: <span>{{ repository }}</span></h2>
-            <h2>Username: <span>{{ username }}</span></h2>
+        <div class="repo-box">
+            <div class="repo-info">
+                <h2>Repository: <span>{{ repository }}</span></h2>
+                <h2>Username: <span>{{ username }}</span></h2>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <h2>Commits</h2>
+                    <p>{{ commits }}</p>
+                </div>
+                <div class="stat">
+                    <h2>Comments</h2>
+                    <p>{{ comments }}</p>
+                </div>
+                <div class="stat">
+                    <h2>Pull Requests</h2>
+                    <p>{{ pulls }}</p>
+                </div>
+                <div class="stat">
+                    <h2>Code Reviews</h2>
+                    <p>{{ reviews }}</p>
+                </div>
+            </div>
+            <a href="{{ url_for('home') }}">
+                <button class="search-again">Search Again</button>
+            </a>
         </div>
-        <div class="stats">
-            <div class="stat">
-                <h2>Commits</h2>
-                <p>{{ commits }}</p>
-            </div>
-            <div class="stat">
-                <h2>Comments</h2>
-                <p>{{ comments }}</p>
-            </div>
-            <div class="stat">
-                <h2>Pull Requests</h2>
-                <p>{{ pulls }}</p>
-            </div>
-            <div class="stat">
-                <h2>Code Reviews</h2>
-                <p>{{ reviews }}</p>
-            </div>
-        </div>
-        <a href="{{ url_for('home') }}">
-            <button class="search-again">Search Again</button>
-        </a>
+        {% if search_history %}
+        <div class="search-box"></div>
+        {% endif %}
     </div>
 </body>
 
