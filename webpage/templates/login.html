@@ -18,6 +18,12 @@
             <source src="{{ url_for('static', filename='assets/video.mp4') }}" type="video/mp4" />
         </video>
     </div>
+
+    <ul class="flashes">
+        {% for message in get_flashed_messages() %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
     <div class="whole-container">
         <div class="Logo">
             <a href="{{ url_for('home') }}">
@@ -26,13 +32,20 @@
         </div>
         <div class="LoginBox">
             <h1>Login</h1>
-            <img src="{{ url_for('static', filename='assets/user-solid.png') }}" alt="person" />
-            <input type="Username" placeholder="Enter Username" />
-
-            <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="lock" />
-            <input type="Password" placeholder="Enter Password" />
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="input-wrapper">
+                    <img src="{{ url_for('static', filename='assets/user-solid.png') }}" alt="person" />
+                    <input type="text" name="username" placeholder="Enter Username" required />
+                </div>
+                <div class="input-wrapper">
+                    <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="lock" />
+                    <input type="password" name="password" placeholder="Enter Password" required />
+                </div>
+                <div class="buttons">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
             <div class="buttons">
-                <button>Login</button>
                 <form action="signup">
                     <button type="submit">Register</button>
                 </form>
