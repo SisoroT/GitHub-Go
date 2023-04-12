@@ -19,6 +19,11 @@
         </video>
     </div>
 
+    <ul class="flashes">
+        {% for message in get_flashed_messages() %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
     <div class="whole-container">
         <div class="Logo">
             <a href="{{ url_for('home') }}">
@@ -31,21 +36,28 @@
             <p style="font-size: 20p"></p>
 
             <p>Please fill in this form to create an account.</p>
-            <img src="{{ url_for('static', filename='assets/mail.png') }}" alt="email" />
-            <input type="Username" id="username" placeholder="Enter Email" />
-            <img src="{{ url_for('static', filename='assets/user-solid.png') }}" alt="person" />
-            <input type="Username" id="username" placeholder="Enter Username" />
-            <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="lock" />
-            <input type="Password" placeholder="Enter Password" />
-            <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="person" />
-            <input type="Password" placeholder="Confirm Password" />
-            <p id="privacy">
-                By creating an account you agree to our
-                <a href="#">Terms & Privacy</a>.
-            </p>
-            <div class="buttons">
-                <button>Register</button>
-            </div>
+            <form action="{{ url_for('signup') }}" method="POST">
+                <div class="input-container">
+                    <img src="{{ url_for('static', filename='assets/mail.png') }}" alt="email" />
+                    <input type="email" name="email" placeholder="Enter Email" required />
+                </div>
+                <div class="input-container">
+                    <img src="{{ url_for('static', filename='assets/user-solid.png') }}" alt="person" />
+                    <input type="text" name="username" placeholder="Enter Username" required />
+                </div>
+                <div class="input-container">
+                    <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="lock" />
+                    <input type="password" name="password" placeholder="Enter Password" required />
+                </div>
+                <div class="input-container">
+                    <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="person" />
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" required />
+                </div>
+                <div class="buttons">
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+
             <div class="RegisterFooter">
                 <a id="resetlink" href="{{ url_for('reset') }}">Forgot your username/password?</a>
                 <p>
