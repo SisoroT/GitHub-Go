@@ -37,6 +37,10 @@ def send_request(repo: str, author: str, api_key: str, endpoint: str):
     if "message" in json_response and json_response["message"] == "Bad credentials":
         return "Invalid personal access token."
 
+    limit_exceeded_msg = "API rate limit exceeded for user ID"
+    if "message" in json_response and limit_exceeded_msg in json_response["message"]:
+        return "API limit exceeded. Please wait 60 seconds and try again."
+
     # check for invalid repo or username
     if "total_count" not in json_response:
         return "Invalid repository or username. Please check the input and try again."
