@@ -1,57 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Github Stats</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/data.css') }}" />
-        <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
-    </head>
 
-    <body>
-        <header>
-            <a href="{{ url_for('home')}} ">
-                <img
-                    src="{{ url_for('static', filename='assets/GitHubGoLogo.png') }}"
-                    alt="Github logo"
-                    class="logo"
-                />
-            </a>
-            <div class="profile">
-                <img
-                    src="{{ url_for('static', filename='assets/blank profile.png') }}"
-                    alt="Profile icon"
-                    class="profile-icon"
-                />
-                <ul class="dropdown">
-                    <li><a href="#">Log Out</a></li>
-                </ul>
-            </div>
-        </header>
-        <div class="container">
+<head>
+    <title>Github Stats</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/data.css') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
+</head>
+
+<body>
+    <header>
+        <a href="{{ url_for('home')}} ">
+            <img src="{{ url_for('static', filename='assets/GitHubGoLogo.png') }}" alt="Github logo" class="logo" />
+        </a>
+        {% if g.user %}
+        <div class="nav_links">
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        </div>
+        {% else %}
+        <nav>
+            <ul class="nav_links">
+                <li><a href="{{ url_for('signup') }}">Sign up</a></li>
+                <li>|</li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+        {% endif %}
+    </header>
+    <div class="container">
+        <div class="repo-box">
             <div class="repo-info">
-                <h2>Repository: <span>example-repo</span></h2>
-                <h2>Username: <span>example-user</span></h2>
+                <h2>Repository: <span>{{ repository }}</span></h2>
+                <h2>Username: <span>{{ username }}</span></h2>
             </div>
             <div class="stats">
                 <div class="stat">
                     <h2>Commits</h2>
-                    <p>10</p>
+                    <p>{{ commits }}</p>
                 </div>
                 <div class="stat">
                     <h2>Comments</h2>
-                    <p>25</p>
+                    <p>{{ comments }}</p>
                 </div>
                 <div class="stat">
                     <h2>Pull Requests</h2>
-                    <p>5</p>
+                    <p>{{ pulls }}</p>
                 </div>
                 <div class="stat">
                     <h2>Code Reviews</h2>
-                    <p>10</p>
+                    <p>{{ reviews }}</p>
                 </div>
             </div>
             <a href="{{ url_for('home') }}">
                 <button class="search-again">Search Again</button>
             </a>
         </div>
-    </body>
+        {% if search_history %}
+        <div class="search-box">
+            <h3>Search History:</h3>
+            {% for search in search_history %}
+            <a class="search" <a href="{{ url_for('rerun_search', repo=search.repo, username=search.username) }}">
+                <h2>{{ search.repo }} || {{ search.username }}</h2>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+</body>
+
 </html>
