@@ -43,62 +43,10 @@ def home():
 
         # if both repository and username have been filled out
         if repo and author and api_key:
-            endpoints = ["commits", "pulls", "reviews", "comments"]
-            counts = {}
-
-            for endpoint in endpoints:
-                # send request to github api
-                response = send_request(repo, author, api_key, endpoint)
-
-                is_error = isinstance(response, str)
-                if is_error:
-                    flash(response)
-                    return render_template("home.html", **template_params)
-
-                # store the total count for each endpoint
-                counts[endpoint] = response["total_count"]
-
-            user_not_contributor = sum(counts.values()) == 0
-            if user_not_contributor:
-                error = (
-                    f'User "{author}" is not a contributor to the "{repo}" repository.'
-                )
-                flash(error)
-                return render_template("home.html", **template_params)
-
-            # save search to database if logged in
-            if g.user:
-                user = User.query.filter_by(username=session["username"]).first()
-                if user:
-                    # Check if the search already exists for the logged-in user
-                    # TODO: make ignore case (maybe use casefold())
-                    existing_search = Search.query.filter_by(
-                        username=author, repo=repo, user_id=user.id
-                    ).first()
-
-                    # Only add the search if it doesn't exist
-                    if not existing_search:
-                        search = Search(username=author, repo=repo, user_id=user.id)
-                        db.session.add(search)
-                        db.session.commit()
-
-            # if everything valid, redirect to the data page with info from API
-            return redirect(
-                url_for(
-                    "data",
-                    repository=repo,
-                    username=author,
-                    commits=counts["commits"],
-                    pulls=counts["pulls"],
-                    reviews=counts["reviews"],
-                    comments=counts["comments"],
-                    search_history={repo: author},
-                )
-            )
+            return search(repo, author, api_key, template_params)
         else:
             error = "Please provide a repository, username, and api key."
             flash(error)
-            return render_template("home.html", **template_params)
 
     api_key = session.get("api_key", "")
     return render_template("home.html", api_key=api_key)
@@ -126,6 +74,72 @@ def data(repository, username):
         reviews=reviews,
         comments=comments,
         search_history=search_history,
+    )
+
+
+@app.route("/rerun_search/<path:repo>/<string:username>")
+def rerun_search(repo, username):
+    api_key = session.get("api_key", "")
+
+    if not api_key:
+        flash("No API key found. Please perform a search on the home page.")
+        return redirect(url_for("home"))
+
+    return search(repo, username, api_key)
+
+
+def search(repo, username, api_key, template_params=None):
+    endpoints = ["commits", "pulls", "reviews", "comments"]
+    counts = {}
+
+    # if template_params is not provided,
+    # create an empty dictionary to avoid errors
+    if template_params is None:
+        template_params = {}
+
+    for endpoint in endpoints:
+        # send request to github api
+        response = send_request(repo, username, api_key, endpoint)
+
+        is_error = isinstance(response, str)
+        if is_error:
+            flash(response)
+            return render_template("home.html", **template_params)
+
+        # store the total count for each endpoint
+        counts[endpoint] = response["total_count"]
+
+    user_not_contributor = sum(counts.values()) == 0
+    if user_not_contributor:
+        error = f'User "{username}" is not a contributor to the "{repo}" repository.'
+        flash(error)
+        return render_template("home.html", **template_params)
+
+    # save search to database if logged in
+    if g.user:
+        user = User.query.filter_by(username=session["username"]).first()
+        if user:
+            existing_search = Search.query.filter(
+                Search.username.ilike(username),
+                Search.repo.ilike(repo),
+                Search.user_id == user.id,
+            ).first()
+            if not existing_search:
+                search = Search(username=username, repo=repo, user_id=user.id)
+                db.session.add(search)
+                db.session.commit()
+
+    # if everything valid, redirect to the data page with info from API
+    return redirect(
+        url_for(
+            "data",
+            repository=repo,
+            username=username,
+            commits=counts["commits"],
+            pulls=counts["pulls"],
+            reviews=counts["reviews"],
+            comments=counts["comments"],
+        )
     )
 
 
