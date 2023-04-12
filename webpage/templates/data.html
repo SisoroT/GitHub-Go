@@ -56,11 +56,11 @@
         </div>
         {% if search_history %}
         <div class="search-box">
+            <h3>Search History:</h3>
             {% for search in search_history %}
-            <div class="search">
-                <h2>Repository: <span>{{ search.repo }}</span></h2>
-                <h2>Username: <span>{{ search.username }}</span></h2>
-            </div>
+            <a class="search" <a href="{{ url_for('rerun_search', repo=search.repo, username=search.username) }}">
+                <h2>{{ search.repo }} || {{ search.username }}</h2>
+            </a>
             {% endfor %}
         </div>
         {% endif %}
