@@ -32,8 +32,15 @@ def home():
         author = request.form["username"]
         api_key = request.form["api_key"]
 
-        # Store the API key in the session
-        session["api_key"] = api_key
+        # Save hashed API key to database for logged-in users
+        if g.user:
+            # If the user uses a different API key, update it in the database
+            if not g.user.api_key or not check_password_hash(g.user.api_key, api_key):
+                g.user.api_key = generate_password_hash(api_key, method="sha256")
+                db.session.commit()
+        else:
+            # Store plaintext API key in the session for non-logged-in users
+            session["api_key"] = api_key
 
         template_params = {
             "repository": repo,
@@ -48,7 +55,13 @@ def home():
             error = "Please provide a repository, username, and api key."
             flash(error)
 
-    api_key = session.get("api_key", "")
+    # Load API key from the database if logged in
+    if g.user and g.user.api_key:
+        api_key = g.user.api_key
+    else:
+        # Load API key from the session if not logged in
+        api_key = session.get("api_key", "")
+
     return render_template("home.html", api_key=api_key)
 
 
@@ -79,7 +92,12 @@ def data(repository, username):
 
 @app.route("/rerun_search/<path:repo>/<string:username>")
 def rerun_search(repo, username):
-    api_key = session.get("api_key", "")
+    # Load API key from the database if logged in
+    if g.user and g.user.api_key:
+        api_key = g.user.api_key
+    else:
+        # Load API key from the session if not logged in
+        api_key = session.get("api_key", "")
 
     if not api_key:
         flash("No API key found. Please perform a search on the home page.")
