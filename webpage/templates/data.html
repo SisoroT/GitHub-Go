@@ -14,14 +14,14 @@
         </a>
         {% if g.user %}
         <div class="nav_links">
-            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            <li ><a style="color:white" href="{{ url_for('logout') }}">Log Out</a></li>
         </div>
         {% else %}
         <nav>
             <ul class="nav_links">
-                <li><a href="{{ url_for('signup') }}">Sign up</a></li>
-                <li>|</li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a style="color:white" href="{{ url_for('signup') }}">Sign up</a></li>
+                &nbsp;
+                <li><a  style="color:white" href="{{ url_for('login') }}">Login</a></li>
             </ul>
         </nav>
         {% endif %}
