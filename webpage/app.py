@@ -1,13 +1,18 @@
 from flask import Flask, render_template, url_for, redirect, request, flash, session, g
 from werkzeug.security import check_password_hash, generate_password_hash
 from backend.models import db, User, Search
-from backend.gh_api import send_request
-from login import searchLogin
-from register import createRegister
+from backend.gh_api import send_request, xor_encrypt_decrypt
+
+# from login import searchLogin
+# from register import createRegister
 
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
+# encrypt the API key with a different key
+SECRET_KEY = "another_really_super_secret_key"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+
+# initialize the database
 db.init_app(app)
 # load the database
 with app.app_context():
@@ -34,8 +39,16 @@ def home():
         author = request.form["username"]
         api_key = request.form["api_key"]
 
-        # Store the API key in the session
-        session["api_key"] = api_key
+        # scramble the API key
+        scrambled_api_key = xor_encrypt_decrypt(api_key, SECRET_KEY)
+
+        if g.user:
+            # Update the scrambled API key in the database for logged-in users
+            g.user.api_key = scrambled_api_key
+            db.session.commit()
+        else:
+            # Store the scrambled API key in the session for non-logged-in users
+            session["api_key"] = scrambled_api_key
 
         template_params = {
             "repository": repo,
@@ -50,7 +63,14 @@ def home():
             error = "Please provide a repository, username, and api key."
             flash(error)
 
-    api_key = session.get("api_key", "")
+    # Load API key from the database and unscramble if logged in
+    if g.user and g.user.api_key:
+        api_key = xor_encrypt_decrypt(g.user.api_key, SECRET_KEY)
+    else:
+        # Load API key from the session and unscramble if not logged in
+        scrambled_api_key = session.get("api_key", "")
+        api_key = xor_encrypt_decrypt(scrambled_api_key, SECRET_KEY)
+
     return render_template("home.html", api_key=api_key)
 
 
@@ -81,7 +101,13 @@ def data(repository, username):
 
 @app.route("/rerun_search/<path:repo>/<string:username>")
 def rerun_search(repo, username):
-    api_key = session.get("api_key", "")
+    # Load API key from the database and unscramble if logged in
+    if g.user and g.user.api_key:
+        api_key = xor_encrypt_decrypt(g.user.api_key, SECRET_KEY)
+    else:
+        # Load API key from the session and unscramble if not logged in
+        scrambled_api_key = session.get("api_key", "")
+        api_key = xor_encrypt_decrypt(scrambled_api_key, SECRET_KEY)
 
     if not api_key:
         flash("No API key found. Please perform a search on the home page.")
@@ -218,12 +244,12 @@ def reset():
 
 
 # NOTE: Testing route to view all entries in the database
-@app.route("/all_entries")
-def all_entries():
+@app.route("/db")
+def show_db():
     users = User.query.all()
     search_histories = Search.query.all()
     return render_template(
-        "all_entries.html", users=users, search_histories=search_histories
+        "show_db.html", users=users, search_histories=search_histories
     )
 
 

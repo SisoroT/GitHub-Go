@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All Entries</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/show_db.css') }}" />
 </head>
 
 <body>
@@ -15,6 +16,7 @@
             <th>Username</th>
             <th>Email</th>
             <th>Hashed Password</th>
+            <th>Scrabled API Key</th>
         </tr>
         {% for user in users %}
         <tr>
@@ -22,6 +24,7 @@
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.password }}</td>
+            <td>{{ user.api_key }}</td>
         </tr>
         {% endfor %}
     </table>
