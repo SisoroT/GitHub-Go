@@ -20,6 +20,9 @@ header {
     height: 50px;
     margin-right: 20px;
 }
+.split li{
+   display: inline;
+}
 
 h1 {
     margin: 0;

@@ -48,6 +48,11 @@ def send_request(repo: str, author: str, api_key: str, endpoint: str):
     return json_response
 
 
+def xor_encrypt_decrypt(data, key):
+    key_len = len(key)
+    return "".join(chr(ord(data[i]) ^ ord(key[i % key_len])) for i in range(len(data)))
+
+
 def main():
     # repo name
     repo = "CSC-4350-TR-SP2023/Team1"
