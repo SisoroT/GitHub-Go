@@ -211,6 +211,12 @@ def signup():
             flash("Passwords do not match.")
             return redirect(url_for("signup"))
 
+        # if email already exists flash error
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash("Email already taken.")
+            return redirect(url_for("signup"))
+
         # if username already exists flash error
         user = User.query.filter_by(username=username).first()
         if user:
@@ -230,14 +236,58 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/forgot")
+@app.route("/forgot", methods=["GET", "POST"])
 def forgot():
-    return render_template("reset.html")
+    # When the form is submitted
+    if request.method == "POST":
+        # Get the email from the form
+        email = request.form["email"]
+        # Check if the user with this email exists
+        user = User.query.filter_by(email=email).first()
+
+        # If user exists, set the session variable and redirect to reset page
+        if user:
+            session["reset_email"] = email
+            return redirect(url_for("reset"))
+        else:
+            # If the email is not found, show an error message
+            flash("Email not found. Please try again or create an account.")
+
+    return render_template("forgot.html")
 
 
-@app.route("/reset")
+@app.route("/reset", methods=["GET", "POST"])
 def reset():
-    return render_template("reset_password.html")
+    # When the form is submitted
+    if request.method == "POST":
+        # Get the new password and its confirmation from the form
+        password = request.form["password"]
+        confirm_password = request.form["confirm_password"]
+
+        # Check if the entered passwords match
+        if password == confirm_password:
+            # Get the email from the session
+            email = session.get("reset_email")
+            if email:
+                # Find the user with the given email
+                user = User.query.filter_by(email=email).first()
+                if user:
+                    # Update the user's password in the database
+                    hashed_password = generate_password_hash(password, method="sha256")
+                    user.password = hashed_password
+                    db.session.commit()
+                    # Remove the reset_email from the session and show a success message
+                    session.pop("reset_email", None)
+                    flash("Password updated successfully. Please log in.")
+                    return redirect(url_for("login"))
+                else:
+                    flash("An error occurred. Please try again.")
+            else:
+                flash("Invalid reset request.")
+        else:
+            flash("Passwords do not match.")
+
+    return render_template("reset.html")
 
 
 # NOTE: Testing route to view all entries in the database
