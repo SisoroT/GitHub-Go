@@ -34,6 +34,36 @@ body {
     margin-bottom: 30px;
     color: #c9d1d9;
 }
+.buttons{
+    width: 100%;
+    margin-top: 10px;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+.ResetPasswordBox .image{
+   
+        display: inline-flex;
+        justify-content: center;
+        text-align: center;
+        top: -50px;
+        left: 50px;
+  
+}
+.ResetPasswordBox input{
+    text-indent: 65px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: rgb(99, 88, 88);
+    border-radius: 10px;
+    font-size: 28px;
+    position: relative;
+    top: -60px;
+    background-color: rgb(210, 201, 201);
+    width: 440px;
+    height: 60px;
+    margin-top: 20px;
+    margin-right: 30px;
+}
 
 .ResetPasswordBox {
     opacity: 0.96;

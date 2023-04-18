@@ -39,12 +39,14 @@
                             margin-top: 30px;
                             margin-bottom: 50px;
                             color: #c9d1d9;
+                            text-align: center;
+                            padding-bottom: 10px;
                         ">
                     Please fill in this form to reset your password.
                 </p>
-                <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="lock" />
+                <img class ="image" src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="lock" />
                 <input type="password" name="password" placeholder="Enter Password" required />
-                <img src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="person" />
+                <img class="image" src="{{ url_for('static', filename='assets/lock-solid.png') }}" alt="person" />
                 <input type="password" name="confirm_password" placeholder="Confirm Password" required />
                 <div class="buttons">
                     <button type="submit">Reset</button>

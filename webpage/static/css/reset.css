@@ -16,6 +16,23 @@ body {
 .Logo {
     margin-right: 130px;
 }
+.buttons{
+    width: 100%;
+    margin-top: 10px;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    text-align: center;
+}
+.ResetBox .mail{
+    bottom: 52px;
+    left: 55px;
+    z-index: 4;
+    position: relative;
+    height: 30px;
+    width: 30px;
+}
+
 .whole-container {
     display: flex;
     flex-direction: row;
@@ -32,6 +49,7 @@ body {
     z-index: 3;
 }
 .ResetBox h1 {
+    padding-bottom: 40px;
     font-size: 50px;
     margin-top: -80px;
     margin-bottom: 70px;

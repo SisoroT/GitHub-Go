@@ -35,7 +35,7 @@
             <h1>Forgot Password?</h1>
 
             <form method="post" action="{{ url_for('forgot') }}">
-                <img src="{{ url_for('static', filename='assets/mail.png') }}" alt="email" />
+                <img class="mail" src="{{ url_for('static', filename='assets/mail.png') }}" alt="email" />
                 <input type="email" id="email" name="email" placeholder="Enter Email" required />
                 <div class="buttons">
                     <button type="submit">Verify</button>
