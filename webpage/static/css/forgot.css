@@ -1,10 +1,9 @@
-
-*{
+* {
     margin: 0;
     padding: 0;
 }
-body{
-    zoom: 90%
+body {
+    zoom: 90%;
 }
 .video-container video {
     top: 0;
@@ -13,35 +12,30 @@ body{
     min-height: 100%;
     position: fixed;
     object-fit: cover;
-    z-index: 1;
 }
 
-.whole-container{
+.whole-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-   
 }
 .Logo img {
     margin-top: 60px;
     position: relative;
-    
+
     width: 500px;
     height: 100px;
     z-index: 3;
 }
-.ResetPasswordBox h1{
+.ResetPasswordBox h1 {
     font-size: 55px;
     margin-top: -150px;
     margin-bottom: 30px;
-    color: #C9D1D9;
-    
-
+    color: #c9d1d9;
 }
 
-.ResetPasswordBox{
+.ResetPasswordBox {
     opacity: 0.96;
     display: flex;
     flex-direction: column;
@@ -54,17 +48,18 @@ body{
     height: 700px;
     border-radius: 35px;
     z-index: 4;
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+        rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+        rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
-#privacy{
+#privacy {
     position: relative;
     top: -20px;
-    color: #C9D1D9;
-    
+    color: #c9d1d9;
 }
-.ResetPasswordBox input{
-   text-indent: 65px;
-   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.ResetPasswordBox input {
+    text-indent: 65px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: rgb(99, 88, 88);
     border-radius: 10px;
     font-size: 28px;
@@ -78,67 +73,71 @@ body{
     display: inline-flex;
     justify-content: center;
     text-align: center;
-    
 }
-.ResetPasswordBox img{
- bottom: 15px;
- left: -190px;
+.ResetPasswordBox img {
+    bottom: 15px;
+    left: -190px;
     z-index: 4;
     position: relative;
     height: 30px;
     width: 30px;
 }
-.ResetPasswordBox button{
-    
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+.ResetPasswordBox button {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+        rgba(0, 0, 0, 0.22) 0px 10px 10px;
     text-align: center;
     border-radius: 25px;
     color: rgb(247, 238, 238);
     font-size: 30px;
     position: relative;
     top: 30px;
-    background-color: #846CA0;
+    background-color: #846ca0;
     width: 190px;
     height: 80px;
 }
 
-.ResetPasswordBox .ResetPasswordFooter{
+.ResetPasswordBox .ResetPasswordFooter {
     display: flex;
     flex-direction: column;
     text-align: center;
     position: absolute;
-    bottom: -0px; 
-    background-color: #846CA0;
+    bottom: -0px;
+    background-color: #846ca0;
     border-bottom-left-radius: 35px;
     border-bottom-right-radius: 35px;
     width: 550px;
     height: 100px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 #resetlink {
     position: relative;
     top: 15px;
     padding: 5px;
     text-align: center;
-    color: #C9D1D9;
+    color: #c9d1d9;
     font-size: 20px;
-    
 }
-.ResetPasswordBox button:hover{
+.ResetPasswordBox button:hover {
     background-color: rgb(140, 43, 149);
-
 }
-.ResetPasswordBox button:Active{
-
+.ResetPasswordBox button:active {
     background-color: rgb(244, 127, 255);
     box-shadow: 2px 2px 5px #000000;
-    }
-.ResetPasswordFooter p{
+}
+.ResetPasswordFooter p {
     position: relative;
     top: 15px;
     padding: 5px;
     text-align: center;
-    color: #C9D1D9;
+    color: #c9d1d9;
     font-size: 20px;
-    
+}
+.flashes {
+    position: relative;
+    top: 20px;
+    padding: 5px;
+    text-align: center;
+    color: red;
+    font-size: 20px;
 }
