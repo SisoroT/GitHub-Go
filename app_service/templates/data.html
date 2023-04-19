@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Github Stats</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/data.css') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
+</head>
+
+<body>
+    <header>
+        <a href="{{ url_for('home')}} ">
+            <img src="{{ url_for('static', filename='assets/GitHubGoLogo.png') }}" alt="Github logo" class="logo" />
+        </a>
+        {% if g.user %}
+        <ul class="nav_links">
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        </ul>
+        {% else %}
+        <div class="split">
+            <nav>
+                <ul class="nav_links">
+                    <li><a href="{{ url_for('register') }}">Sign up</a></li>
+                    <li>|</li>
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+    </header>
+    <div class="container">
+        <div class="repo-box">
+            <div class="repo-info">
+                <h2>Repository: <span>{{ repository }}</span></h2>
+                <h2>Username: <span>{{ username }}</span></h2>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <h2>Commits</h2>
+                    <p>{{ commits }}</p>
+                </div>
+                <div class="stat">
+                    <h2>Comments</h2>
+                    <p>{{ comments }}</p>
+                </div>
+                <div class="stat">
+                    <h2>Pull Requests</h2>
+                    <p>{{ pulls }}</p>
+                </div>
+                <div class="stat">
+                    <h2>Code Reviews</h2>
+                    <p>{{ reviews }}</p>
+                </div>
+            </div>
+            <a href="{{ url_for('home') }}">
+                <button class="search-again">Search Again</button>
+            </a>
+        </div>
+        {% if search_history %}
+        <div class="search-box">
+            <h2 class="search-history-title">Search History:</h2>
+            <table class="search-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Repository</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for search in search_history %}
+                    <tr class="search-row">
+                    <tr class="search-row"
+                        onclick="window.location='{{ url_for('rerun_search', repo=search.repo, username=search.username) }}'">
+                        <td>
+                            <span class="search-content">{{ search.username }}</span>
+                        </td>
+                        <td>
+                            <span class="search-content">{{ search.repo }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+</body>
+
+</html>
