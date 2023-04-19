@@ -68,7 +68,6 @@
                 </thead>
                 <tbody>
                     {% for search in search_history %}
-                    <tr class="search-row">
                     <tr class="search-row"
                         onclick="window.location='{{ url_for('rerun_search', repo=search.repo, username=search.username) }}'">
                         <td>
@@ -83,6 +82,7 @@
             </table>
         </div>
         {% endif %}
+    </div>
 </body>
 
 </html>
