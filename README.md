@@ -2,18 +2,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/SisoroT/Github-Go">
-    <img src="images/GitHubGoLogo.png" alt="Logo" width="80" height="80">
+    <img src="images/GitHubGoLogo.png" alt="Logo" width="800px">
   </a>
 
-<h3 align="center">Github Go</h3>
-
   <p align="center">
-    project_description
+    Gain Insights into Individual Contributions to Open Source Projects
     <br />
     <a href="https://github.com/SisoroT/Github-Go"><strong>View Demo »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/SisoroT/Github-Go">View Demo</a>
   </p>
 </div>
 
@@ -49,7 +44,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `SisoroT`, `Github-Go`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+GitHub Go is a powerful Flask-based web application designed to help you analyze an individual's contributions to a GitHub repository. It provides a comprehensive view of a user's impact on a project by visualizing their commits, pull requests, issue comments, and code reviews. The tool promotes transparency and collaboration within the open-source community and serves as a valuable resource for project management and team engagement.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
