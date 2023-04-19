@@ -1,13 +1,13 @@
 <!-- PROJECT LOGO -->
 <div align="center">
-  <a href="https://github.com/SisoroT/Github-Go">
+  <a href="https://github.com/SisoroT/GitHub-Go">
     <img src="images/GitHubGoLogo.png" alt="Logo" width="600px">
   </a>
 
   <p align="center">
     Gain Insights into Individual Contributions to Open Source Projects!
     <br />
-    <a href="https://github.com/SisoroT/Github-Go"><strong>View Demo »</strong></a>
+    <a href="https://github.com/SisoroT/GitHub-Go"><strong>View Demo »</strong></a>
   </p>
 </div>
 
@@ -74,14 +74,14 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at the [Github Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+1. Get a free API Key from the [Github Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 2. Clone the repo
     ```sh
-    git clone https://github.com/SisoroT/Github-Go.git
+    git clone https://github.com/SisoroT/GitHub-Go.git
     ```
 3. Install pip packages
     ```sh
-    cd Github-Go
+    cd GitHub-Go
     ```
     ```sh
     pip3 install -r requirements.txt
@@ -112,16 +112,16 @@ Ryan Taylor - rtaylor6410@gmail.com
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/SisoroT/Github-Go.svg?style=for-the-badge
-[contributors-url]: https://github.com/SisoroT/Github-Go/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/SisoroT/Github-Go.svg?style=for-the-badge
-[forks-url]: https://github.com/SisoroT/Github-Go/network/members
-[stars-shield]: https://img.shields.io/github/stars/SisoroT/Github-Go.svg?style=for-the-badge
-[stars-url]: https://github.com/SisoroT/Github-Go/stargazers
-[issues-shield]: https://img.shields.io/github/issues/SisoroT/Github-Go.svg?style=for-the-badge
-[issues-url]: https://github.com/SisoroT/Github-Go/issues
-[license-shield]: https://img.shields.io/github/license/SisoroT/Github-Go.svg?style=for-the-badge
-[license-url]: https://github.com/SisoroT/Github-Go/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/SisoroT/GitHub-Go.svg?style=for-the-badge
+[contributors-url]: https://github.com/SisoroT/GitHub-Go/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/SisoroT/GitHub-Go.svg?style=for-the-badge
+[forks-url]: https://github.com/SisoroT/GitHub-Go/network/members
+[stars-shield]: https://img.shields.io/github/stars/SisoroT/GitHub-Go.svg?style=for-the-badge
+[stars-url]: https://github.com/SisoroT/GitHub-Go/stargazers
+[issues-shield]: https://img.shields.io/github/issues/SisoroT/GitHub-Go.svg?style=for-the-badge
+[issues-url]: https://github.com/SisoroT/GitHub-Go/issues
+[license-shield]: https://img.shields.io/github/license/SisoroT/GitHub-Go.svg?style=for-the-badge
+[license-url]: https://github.com/SisoroT/GitHub-Go/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
