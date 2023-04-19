@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Entries</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/show_db.css') }}" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>All Users:</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Hashed Password</th>
+                <th>Scrabled API Key</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.api_key }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h1>All Search Histories:</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Repository</th>
+                <th>Username</th>
+                <th>User ID</th>
+            </tr>
+            {% for search_history in search_histories %}
+            <tr>
+                <td>{{ search_history.id }}</td>
+                <td>{{ search_history.repo }}</td>
+                <td>{{ search_history.username }}</td>
+                <td>{{ search_history.user_id }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>
