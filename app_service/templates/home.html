@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHubGo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='assets/GitHubGoIcon.png') }}" type="image/x-icon" />
+</head>
+
+<body>
+    <header class="logo">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='assets/GitHubGoLogo.png') }}" alt="Logo" />
+        </a>
+        {% if g.user %}
+        <ul class="nav_links">
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        </ul>
+        {% else %}
+        <nav>
+            <ul class="nav_links">
+                <li><a href="{{ url_for('register') }}">Sign up</a></li>
+                <li>|</li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+        </nav>
+        {% endif %}
+    </header>
+
+    <ul class="flashes">
+        {% for message in get_flashed_messages() %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+
+    <p style="color: white; text-align: center; padding-top: 30px">
+        Don't have an API Key? Create one
+        <a style="color: #846ca0; text-decoration: none"
+            href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">here!</a>
+    </p>
+    <form action="#" method="POST">
+        <div class="api-outer-container">
+            <table class="api-inner-container">
+                <tr>
+                    <td>
+                        <input type="password" placeholder="API Key" class="search" name="api_key"
+                            value="{{ api_key }}" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="repo-outer-container">
+            <table class="repo-inner-container">
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Repository" class="search" name="repository"
+                            value="{{ repository }}" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="user-outer-container">
+            <table class="user-inner-container">
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Username" class="search" name="username"
+                            value="{{ username }}" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="butContainer">
+            <button class="button" type="submit">GO</button>
+        </div>
+    </form>
+</body>
+
+</html>
