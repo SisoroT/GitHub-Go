@@ -14,6 +14,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 2rem;
+    table-layout: fixed;
 }
 
 th,
@@ -21,6 +22,7 @@ td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #6e7681;
+    word-wrap: break-word;
 }
 
 th {
@@ -45,14 +47,14 @@ td:nth-child(2),
 th:nth-child(2),
 td:nth-child(3),
 th:nth-child(3) {
-    width: 25%;
+    width: 30%;
 }
 
 td:nth-child(4),
 th:nth-child(4),
 td:nth-child(5),
 th:nth-child(5) {
-    width: 35%;
+    width: 30%;
 }
 
 .container {
