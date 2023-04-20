@@ -1,13 +1,11 @@
 <!-- PROJECT LOGO -->
 <div align="center">
-  <a href="https://github.com/SisoroT/GitHub-Go">
-    <img src="images/GitHubGoLogo.png" alt="Logo" width="600px">
-  </a>
+    <img src="images/GitHubGoLogo.png" alt="Logo" width="530px">
 
   <p align="center">
     Gain Insights into Individual Contributions to Open Source Projects!
-    <br />
-    <a href="https://github.com/SisoroT/GitHub-Go"><strong>View Demo »</strong></a>
+    <br/>
+    <a href="https://user-images.githubusercontent.com/65800865/233450717-1246977b-7396-4ae8-88dc-47b412b6ebd7.mp4"><strong>View Demo »</strong></a>
   </p>
 </div>
 
@@ -29,11 +27,13 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+      <ul>
+        <li><a href="#performing-a-search">Performing a Search</a></li>
+        <li><a href="#search-history">Search History</a></li>
+        <li><a href="#logging-in">Logging In</a></li>
+        <li><a href="#database-page">Database Page</a></li>
+      </ul>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -45,7 +45,12 @@
   <img src="images/search-results.png"/>
 </p>
 
-**GitHub Go** is a powerful Flask-based web application designed to help you analyze an individual's contributions to a GitHub repository. It provides a comprehensive view of a user's impact on a project by visualizing their commits, pull requests, issue comments, and code reviews. The tool promotes transparency and collaboration within the open-source community and serves as a valuable resource for project management and team engagement.
+**GitHub Go** is a powerful Flask-based web application designed to help you analyze an individual's contributions to a GitHub repository.
+It provides a comprehensive view of a user's impact on a project by visualizing their commits, pull requests, issue comments, and code reviews.
+The tool promotes transparency and collaboration within the open-source community and serves as a valuable resource for project management and team engagement.
+
+This project was undertaken as part of my final year Software Engineering course in college.
+As the lead developer, my primary focus was on the backend, where I extensively worked on GitHub API integration and database management.
 
 ### Built With
 
@@ -92,21 +97,26 @@ Ensure that Python and pip are installed on your system.
 
 ## Usage
 
-**GitHub Go** uses the GitHub API to perform searches. You can get a free API Key from the [Github Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+**GitHub Go** leverages the GitHub API to perform searches. You can get a free API Key from the [Github Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
 ### Performing a search
+
+To perform a search, input a complete repository name in the format `{owner}/{repository}` along with the username of the user whose contributions you'd like to explore.
+After submitting, you will be redirected to the data page, which displays a comprehensive overview of the selected user's contributions to the specified repository.
 
 https://user-images.githubusercontent.com/65800865/233450717-1246977b-7396-4ae8-88dc-47b412b6ebd7.mp4
 
 ### Search History
 
+Logged-in users can access their search history on the right side of the data page.
+This feature enables users to click on a previous search, rerun it, and view updated contribution information for the user and repository associated with the past search.
+
 https://user-images.githubusercontent.com/65800865/233455562-46999d35-9db7-4b96-a949-25d21ac8fbc1.mp4
 
 ### Logging in
 
-**GitHub Go** does not require users to be logged in in order to perform searches.
-Logging in allows users to keep their search history and api key saved in the database.
-This allows users to rerun searches from the search history and prevents users from having to retype their api key after a session ends.
+While **GitHub Go** does not require user authentication to conduct searches, logging in provides additional benefits.
+Logged-in users can save their search history and API key in the database, allowing for seamless access to previous searches and eliminating the need to re-enter the API key after each session.
 
 <p align="center">
   <img src="images/login.png"/>
@@ -114,9 +124,17 @@ This allows users to rerun searches from the search history and prevents users f
 
 ### Database Page
 
+Initially developed for testing purposes, the Database Page offers an effective way to visualize all data stored in the database.
+It is not accessible through the main website, but you can reach it by navigating to [localhost:5000/db](http://localhost:5000/db) while the server is running.
+
 <p align="center">
   <img src="images/db.png"/>
 </p>
+
+## Contact
+
+Should you have any questions or need further assistance, please feel free to reach out to me via email at [rtaylor6410@gmail.com](mailto:rtaylor6410@gmail.com).
+I'll be more than happy to help.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
