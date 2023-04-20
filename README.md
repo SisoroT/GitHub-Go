@@ -41,7 +41,9 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<p align="center">
+  <img src="images/search-results.png"/>
+</p>
 
 **GitHub Go** is a powerful Flask-based web application designed to help you analyze an individual's contributions to a GitHub repository. It provides a comprehensive view of a user's impact on a project by visualizing their commits, pull requests, issue comments, and code reviews. The tool promotes transparency and collaboration within the open-source community and serves as a valuable resource for project management and team engagement.
 
@@ -90,21 +92,35 @@ Ensure that Python and pip are installed on your system.
 
 ## Usage
 
-**GitHub Go** uses the GitHub API. You can get a free API Key from the [Github Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-<br />
+**GitHub Go** uses the GitHub API to perform searches. You can get a free API Key from the [Github Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Performing a search
 
-<!-- CONTACT -->
+https://user-images.githubusercontent.com/65800865/233450717-1246977b-7396-4ae8-88dc-47b412b6ebd7.mp4
 
-## Contact
+### Search History
 
-Ryan Taylor - rtaylor6410@gmail.com
+https://user-images.githubusercontent.com/65800865/233455562-46999d35-9db7-4b96-a949-25d21ac8fbc1.mp4
+
+### Logging in
+
+**GitHub Go** does not require users to be logged in in order to perform searches.
+Logging in allows users to keep their search history and api key saved in the database.
+This allows users to rerun searches from the search history and prevents users from having to retype their api key after a session ends.
+
+<p align="center">
+  <img src="images/login.png"/>
+</p>
+
+### Database Page
+
+<p align="center">
+  <img src="images/db.png"/>
+</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[product-screenshot]: images/screenshot.png
 [Flask-url]: https://flask.palletsprojects.com/
 [Flask-logo]: https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white
 [Python-url]: https://www.python.org/
