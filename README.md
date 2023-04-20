@@ -47,7 +47,6 @@
 
 **GitHub Go** is a powerful Flask-based web application designed to help you analyze an individual's contributions to a GitHub repository.
 It provides a comprehensive view of a user's impact on a project by visualizing their commits, pull requests, issue comments, and code reviews.
-The tool promotes transparency and collaboration within the open-source community and serves as a valuable resource for project management and team engagement.
 
 This project was undertaken as part of my final year Software Engineering course in college.
 As the lead developer, my primary focus was on the backend, where I extensively worked on GitHub API integration and database management.
