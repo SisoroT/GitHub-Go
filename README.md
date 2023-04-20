@@ -96,7 +96,7 @@ Ensure that Python and pip are installed on your system.
 
 ## Usage
 
-**GitHub Go** leverages the GitHub API to perform searches. You can get a free API Key from the [Github Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+**GitHub Go** leverages the GitHub API to perform searches. You can get a free API Key from the [Github Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ### Performing a search
 
