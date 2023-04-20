@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <div align="center">
-    <img src="images/GitHubGoLogo.png" alt="Logo" width="530px">
+    <img src="images/GitHubGoLogo.png" alt="Logo" width="560px">
 
   <p align="center">
     Gain Insights into Individual Contributions to Open Source Projects!
